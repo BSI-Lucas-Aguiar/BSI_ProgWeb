@@ -5,26 +5,52 @@
  */
 package br.com.cadastroEmbarcacoes.Embarcacoes.model;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.*;
 
-/**
- *
- * @author lukas
- */
-public abstract class Embarcacao {
-    private String idEmbarcacao;
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Embarcacao implements Serializable{
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idEmbarcacao;
+    @Column(length = 20, updatable = false)
     private String marca;
+    @Column(length = 20, updatable = false)
     private String modelo;
+    @Column(length = 20, updatable = false)
     private String cor;
+    @Column(updatable = true)
     private double valor;
+    @Column(nullable = false)
+    private int numPassageiros;
+    @Column(nullable = false)
     private boolean teveManutencao;
+    @Column(nullable = false)
     private boolean aportada;
+    @Column(nullable = false, updatable = false)
+    private TipoEmbarcacaoEnum tipo;
 
-    public String getIdEmbarcacao() {
+    
+    
+    @ManyToOne
+    private Cliente cliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public int getIdEmbarcacao() {
         return idEmbarcacao;
     }
 
-    public void setIdEmbarcacao(String idEmbarcacao) {
+    public void setIdEmbarcacao(int idEmbarcacao) {
         this.idEmbarcacao = idEmbarcacao;
     }
 
@@ -55,6 +81,14 @@ public abstract class Embarcacao {
     public double getValor() {
         return valor;
     }
+    
+    public int getNumPassageiros() {
+        return numPassageiros;
+    }
+
+    public void setNumPassageiros(int numPassageiros) {
+        this.numPassageiros = numPassageiros;
+    }
 
     public void setValor(double valor) {
         this.valor = valor;
@@ -74,6 +108,14 @@ public abstract class Embarcacao {
 
     public void setAportada(boolean aportada) {
         this.aportada = aportada;
+    }
+    
+    public TipoEmbarcacaoEnum getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoEmbarcacaoEnum tipo) {
+        this.tipo = tipo;
     }
     
     @Override

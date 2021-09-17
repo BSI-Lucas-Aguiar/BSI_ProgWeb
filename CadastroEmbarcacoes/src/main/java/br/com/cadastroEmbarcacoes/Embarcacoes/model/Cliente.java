@@ -1,17 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.com.cadastroEmbarcacoes.Embarcacoes.model;
 
-/**
- *
- * @author lukas
- */
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+
+@Entity
 public class Cliente extends Usuario {
+    @Column(length = 12, nullable = false)
     private String cpf;
+    @Column(length = 100, nullable = false)
     private String nome;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Embarcacao> embarcacao = new ArrayList<>();
     
     public Cliente(){
         

@@ -5,16 +5,9 @@
  */
 package br.com.cadastroEmbarcacoes.Embarcacoes.model;
 
-import javax.persistence.*;
 
-@Entity
-public class Administrador extends Usuario{
-    
-    public Administrador(){
-        
-    }
-    
-    public void cadastrarAdministrador(){
-        
-    }
+public enum TipoEmbarcacaoEnum {
+    Lancha,
+    Iate,
+    JetSki;
 }
