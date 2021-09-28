@@ -8,6 +8,12 @@ package br.com.cadastroEmbarcacoes.Embarcacoes.model;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -16,26 +22,50 @@ public abstract class Embarcacao implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEmbarcacao;
-    @Column(length = 20, updatable = false)
+    
+    @Column(nullable = false, updatable = false, length = 20)
+    @NotBlank(message = "Marca não pode estar em branco")
+    @Length(min = 5, message = "Deve ter no mínimo 5 caracteres")
+    @Length(max = 20, message = "Deve ter no máximo 20 caracteres")
     private String marca;
-    @Column(length = 20, updatable = false)
+    
+    @Column(updatable = false, length = 20)
+    @NotBlank(message = "Modelo não pode estar em branco")
+    @Length(min = 5, message = "Deve ter no mínimo 5 caracteres")
+    @Length(max = 20, message = "Deve ter no máximo 20 caracteres")
     private String modelo;
-    @Column(length = 20, updatable = false)
+    
+    @Column(updatable = false, length = 20)
+    @NotBlank(message = "Cor não pode estar em branco")
+    @Length(min = 5, message = "Deve ter no mínimo 5 caracteres")
+    @Length(max = 20, message = "Deve ter no máximo 20 caracteres")
     private String cor;
+    
     @Column(updatable = true)
+    @Min(0)
+    @NotNull(message = "Valor não pode estar em branco")
     private double valor;
+    
     @Column(nullable = false)
+    @NotNull(message = "Número de Passageiros não pode estar em branco")
+    @Digits(integer = 3, fraction = 0, message = "Deve ser inteiro e ter até 3 digitos.")
     private int numPassageiros;
+    
     @Column(nullable = false)
+    @NotNull(message = "Teve Manutenção não pode estar em branco")
     private boolean teveManutencao;
+    
     @Column(nullable = false)
+    @NotNull(message = "Aportada não pode estar em branco")
     private boolean aportada;
+    
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)
+    @NotNull(message = "A embarcação deve ter um tipo.")
     private TipoEmbarcacaoEnum tipo;
 
-    
-    
     @ManyToOne
+    @Valid
     private Cliente cliente;
 
     public Cliente getCliente() {

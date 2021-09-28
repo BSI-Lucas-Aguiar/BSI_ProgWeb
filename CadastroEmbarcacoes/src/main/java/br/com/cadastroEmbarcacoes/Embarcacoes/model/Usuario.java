@@ -2,6 +2,8 @@ package br.com.cadastroEmbarcacoes.Embarcacoes.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 
 
@@ -12,9 +14,16 @@ public abstract class Usuario implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
+    
     @Column(nullable = false, length = 100, unique = true, updatable = false)
+    @NotBlank(message = "Insira um nome de Usuário válido.")
+    @Length(min = 5, message = "O nome de usuário deve ter no mínimo 5 caracteres.")
+    @Length(max = 100, message = "O nome de usuáriodeve ter no máximo 100 caracteres.")
     private String nomeUsuario;
-    @Column(nullable = false, unique = false, updatable = true) //Não possui length para gerar hash criptografado de 255 caracteres
+    
+    @Column(nullable = false, unique = false, updatable = true) //Pretendido gerar hash criptografado de 255 caracteres
+    @NotBlank(message = "Insira uma senha válido.")
+    @Length(min = 8, max = 8, message = "A senha deve conter exatamente 8 caractere.")
     private String senha;
 
     public int getIdUsuario() {
