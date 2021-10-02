@@ -1,6 +1,7 @@
 
 package br.com.cadastroEmbarcacoes.Embarcacoes.model;
 
+import br.com.cadastroEmbarcacoes.annotation.EmailValidation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
@@ -22,6 +23,13 @@ public class Cliente extends Usuario {
     @Length(min = 5, message = "O nome deve ter no mínimo 5 caracteres.")
     @Length(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
     private String nome;
+    
+    @Column(length = 100, nullable = false)
+    @NotBlank(message = "Insira um nome válido.")
+    @Length(min = 5, message = "O nome deve ter no mínimo 5 caracteres.")
+    @Length(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
+    @EmailValidation(message = "Email Inválido")
+    private String email;
     
     @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
