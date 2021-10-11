@@ -1,5 +1,5 @@
 
-package br.com.cadastroEmbarcacoes.Embarcacoes.model;
+package br.com.cadastroEmbarcacoes.model;
 
 import br.com.cadastroEmbarcacoes.annotation.EmailValidation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
@@ -20,18 +21,17 @@ public class Cliente extends Usuario {
     
     @Column(length = 100, nullable = false)
     @NotBlank(message = "Insira um nome válido.")
-    @Length(min = 5, message = "O nome deve ter no mínimo 5 caracteres.")
-    @Length(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
+    @Length(min = 5, max = 100, message = "O nome deve ter no mínimo 5 caracteres e no máximo 100.")
     private String nome;
     
     @Column(length = 100, nullable = false)
     @NotBlank(message = "Insira um nome válido.")
-    @Length(min = 5, message = "O nome deve ter no mínimo 5 caracteres.")
-    @Length(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
+    @Length(min = 5, max = 100, message = "O email deve ter no mínimo 5 caracteres e no máximo 100.")
     @EmailValidation(message = "Email Inválido")
     private String email;
     
     @JsonIgnore
+    @Valid
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Embarcacao> embarcacoes = new ArrayList<>();
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.cadastroEmbarcacoes.Embarcacoes.model;
+package br.com.cadastroEmbarcacoes.model;
 
 import javax.persistence.*;
 

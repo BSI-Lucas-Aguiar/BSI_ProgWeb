@@ -1,4 +1,4 @@
-package br.com.cadastroEmbarcacoes.Embarcacoes.model;
+package br.com.cadastroEmbarcacoes.model;
 
 import br.com.cadastroEmbarcacoes.annotation.SenhaValidation;
 import java.io.Serializable;
@@ -18,12 +18,11 @@ public abstract class Usuario implements Serializable{
     
     @Column(nullable = false, length = 100, unique = true, updatable = false)
     @NotBlank(message = "Insira um nome de Usuário válido.")
-    @Length(min = 5, message = "O nome de usuário deve ter no mínimo 5 caracteres.")
-    @Length(max = 100, message = "O nome de usuáriodeve ter no máximo 100 caracteres.")
+    @Length(min = 5, max = 100, message = "O nome de usuário deve ter no mínimo 5 caracteres e no máximo 100.")
     private String login;
     
     @Column(nullable = false, unique = false, updatable = true) //Pretendido gerar hash criptografado de 255 caracteres
-    @NotBlank(message = "Insira uma senha válido.")
+    @NotBlank(message = "Insira uma senha válida.")
     @Length(min = 8, max = 8, message = "A senha deve conter exatamente 8 caractere.")
     @SenhaValidation(message = "Senha inválida")
     private String senha;

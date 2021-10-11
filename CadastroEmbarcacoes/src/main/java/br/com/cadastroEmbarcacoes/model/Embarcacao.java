@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.com.cadastroEmbarcacoes.Embarcacoes.model;
+package br.com.cadastroEmbarcacoes.model;
 
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -25,39 +19,37 @@ public abstract class Embarcacao implements Serializable{
     
     @Column(nullable = false, updatable = false, length = 20)
     @NotBlank(message = "Marca não pode estar em branco")
-    @Length(min = 5, message = "Deve ter no mínimo 5 caracteres")
-    @Length(max = 20, message = "Deve ter no máximo 20 caracteres")
+    @Length(min = 5,max = 20, message = "Marca deve ter no mínimo 5 caracteres e no máximo 20")
     private String marca;
     
     @Column(updatable = false, length = 20)
     @NotBlank(message = "Modelo não pode estar em branco")
-    @Length(min = 5, message = "Deve ter no mínimo 5 caracteres")
-    @Length(max = 20, message = "Deve ter no máximo 20 caracteres")
+    @Length(min = 5,max = 20, message = "Modelo deve ter no mínimo 5 caracteres e no máximo 20")
     private String modelo;
     
     @Column(updatable = false, length = 20)
     @NotBlank(message = "Cor não pode estar em branco")
-    @Length(min = 5, message = "Deve ter no mínimo 5 caracteres")
-    @Length(max = 20, message = "Deve ter no máximo 20 caracteres")
+    @Length(min = 5,max = 20, message = "Cor deve ter no mínimo 5 caracteres e no máximo 20")
     private String cor;
     
     @Column(updatable = true)
     @Min(0)
     @NotNull(message = "Valor não pode estar em branco")
-    private double valor;
+    private Double valor;
     
     @Column(nullable = false)
-    @NotNull(message = "Número de Passageiros não pode estar em branco")
-    @Digits(integer = 3, fraction = 0, message = "Deve ser inteiro e ter até 3 digitos.")
-    private int numPassageiros;
+    @NotNull(message = "Número de passageiros não pode estar em branco")
+    @Digits(integer = 3, fraction = 0, message = "Número de passageiros deve ser inteiro e ter até 3 digitos.")
+    @Length(min = 2, message = "Número de passageiros deve capacidade de no mínimo 2 passageiros")
+    private Integer numPassageiros;
     
     @Column(nullable = false)
     @NotNull(message = "Teve Manutenção não pode estar em branco")
-    private boolean teveManutencao;
+    private Boolean teveManutencao;
     
     @Column(nullable = false)
     @NotNull(message = "Aportada não pode estar em branco")
-    private boolean aportada;
+    private Boolean aportada;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)
@@ -65,7 +57,6 @@ public abstract class Embarcacao implements Serializable{
     private TipoEmbarcacaoEnum tipo;
 
     @ManyToOne
-    @Valid
     private Cliente cliente;
 
     public Cliente getCliente() {
