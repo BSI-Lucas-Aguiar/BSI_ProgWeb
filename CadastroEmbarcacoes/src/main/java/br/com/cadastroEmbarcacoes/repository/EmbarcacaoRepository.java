@@ -13,7 +13,7 @@ public interface EmbarcacaoRepository extends JpaRepository<Embarcacao, Long> {
     public List<Embarcacao> findByCliente (@Param("cliente") String cliente);
     
     @Query("SELECT e FROM Embarcacao e WHERE e.marca = :marca OR e.modelo = :modelo")
-    public List<Embarcacao> findByMarcaOrModelo (@Param("marca") String marca, @Param("Modelo") String modelo);
+    public List<Embarcacao> findByMarcaOrModelo (@Param("marca") String marca, @Param("modelo") String modelo);
     
     //Buscar valores iguais ou maiores ao informado
     @Query("SELECT e FROM Embarcacao e WHERE e.valor >= :valor")

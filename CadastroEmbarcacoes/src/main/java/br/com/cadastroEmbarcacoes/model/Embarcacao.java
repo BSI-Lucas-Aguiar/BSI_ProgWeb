@@ -53,7 +53,6 @@ public class Embarcacao implements Serializable{
     @Column(nullable = false)
     @NotNull(message = "Número de passageiros não pode estar em branco")
     @Digits(integer = 3, fraction = 0, message = "Número de passageiros deve ser inteiro e ter até 3 digitos.")
-    @Length(min = 2, message = "Número de passageiros deve capacidade de no mínimo 2 passageiros")
     private Integer numPassageiros;
     
     @Column(nullable = false)

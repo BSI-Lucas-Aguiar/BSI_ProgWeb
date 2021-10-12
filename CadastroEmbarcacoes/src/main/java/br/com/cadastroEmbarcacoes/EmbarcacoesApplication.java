@@ -1,12 +1,12 @@
-package br.com.cadastroEmbarcacoes.Embarcacoes;
+package br.com.cadastroEmbarcacoes;
 
+import br.com.cadastroEmbarcacoes.model.Administrador;
 import br.com.cadastroEmbarcacoes.model.Cliente;
 import br.com.cadastroEmbarcacoes.model.Embarcacao;
 import br.com.cadastroEmbarcacoes.model.TipoEmbarcacaoEnum;
 import br.com.cadastroEmbarcacoes.repository.AdministradorRepository;
 import br.com.cadastroEmbarcacoes.repository.ClienteRepository;
 import br.com.cadastroEmbarcacoes.repository.EmbarcacaoRepository;
-import br.com.cadastroEmbarcacoes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +19,8 @@ public class EmbarcacoesApplication implements CommandLineRunner {
         private ClienteRepository clienteRepo;
         @Autowired
         private EmbarcacaoRepository embarcacaoRepo;
-        
+        @Autowired
+        private AdministradorRepository administradorRepo;
         
 	public static void main(String[] args) {
 		SpringApplication.run(EmbarcacoesApplication.class, args);
@@ -30,14 +31,16 @@ public class EmbarcacoesApplication implements CommandLineRunner {
         
         
         //Cliente
-        Cliente c1 = new Cliente("Lucas", "199.312.140-40", "lucas@gmail.com", "lucas1", "12345678");
+        Cliente c1 = new Cliente( "435.030.310-30","Lucas", "lucas1@gmail.com", "lucas1", "12345678");
         clienteRepo.save(c1);
-        Cliente c2  = new Cliente("Mateus", "730.507.110-27", "mateus@gmail.com", "mateus1", "12345678");
+        Cliente c2  = new Cliente("572.779.480-33", "Mateus",  "mateus1@gmail.com", "mateus1", "12345678");
         clienteRepo.save(c2);
-        Cliente c3  = new Cliente("Amarildo", "832.932.660-88", "amarildo@gmail.com", "amarildo1", "12345678");
+        Cliente c3  = new Cliente("351.212.330-94", "Amarildo",  "amarildo2@gmail.com", "amarildo1", "12345678");
         clienteRepo.save(c3);
 
         //Administrador
+        Administrador a1 = new Administrador("admin", "adm12345");
+        administradorRepo.save(a1);
         
         //Embarcações
         Embarcacao e1 = new Embarcacao("Fibrafort", "F420 GC", "Branca", 1000000.00, 4, false, true, TipoEmbarcacaoEnum.Iate, c1);

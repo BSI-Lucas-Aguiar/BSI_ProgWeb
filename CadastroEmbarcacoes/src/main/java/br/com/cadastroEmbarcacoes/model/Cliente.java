@@ -22,9 +22,9 @@ public class Cliente extends Usuario {
         this.email = email;
     }
     
-    @Column(length = 12, nullable = false)
+    @Column(length = 14, nullable = false)
     @NotBlank(message = "Insira um CPF válido.")
-    @CPF
+    @CPF(message = "CPF não validado")
     private String cpf;
     
     @Column(length = 100, nullable = false)
@@ -32,10 +32,11 @@ public class Cliente extends Usuario {
     @Length(min = 5, max = 100, message = "O nome deve ter no mínimo 5 caracteres e no máximo 100.")
     private String nome;
     
-    @Column(length = 100, nullable = false)
+    
+    @Column(length = 100, nullable = false, unique = true)
     @NotBlank(message = "Insira um nome válido.")
     @Length(min = 5, max = 100, message = "O email deve ter no mínimo 5 caracteres e no máximo 100.")
-    @EmailValidation(message = "Email Inválido")
+    @EmailValidation
     private String email;
     
     @JsonIgnore
