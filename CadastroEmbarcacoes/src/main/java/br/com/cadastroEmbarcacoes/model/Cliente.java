@@ -14,6 +14,14 @@ import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 public class Cliente extends Usuario {
+    
+    public Cliente(String cpf, String nome, String email, String login, String senha) {
+        super(login, senha);
+        this.cpf = cpf;
+        this.nome = nome;
+        this.email = email;
+    }
+    
     @Column(length = 12, nullable = false)
     @NotBlank(message = "Insira um CPF válido.")
     @CPF
@@ -34,10 +42,6 @@ public class Cliente extends Usuario {
     @Valid
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Embarcacao> embarcacoes = new ArrayList<>();
-    
-    public Cliente(){
-        
-    }
 
     public String getCpf() {
         return cpf;
@@ -57,6 +61,14 @@ public class Cliente extends Usuario {
     
     public void cadastrarCliente(){
         
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

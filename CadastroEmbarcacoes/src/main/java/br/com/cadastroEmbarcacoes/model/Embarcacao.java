@@ -11,7 +11,20 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Embarcacao implements Serializable{
+public class Embarcacao implements Serializable{
+
+    public Embarcacao(String marca, String modelo, String cor, Double valor, Integer numPassageiros, Boolean teveManutencao, Boolean aportada, TipoEmbarcacaoEnum tipo, Cliente cliente) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.valor = valor;
+        this.numPassageiros = numPassageiros;
+        this.teveManutencao = teveManutencao;
+        this.aportada = aportada;
+        this.tipo = tipo;
+        this.cliente = cliente;
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

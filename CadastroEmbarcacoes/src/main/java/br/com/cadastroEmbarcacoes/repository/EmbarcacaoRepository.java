@@ -1,6 +1,5 @@
 package br.com.cadastroEmbarcacoes.repository;
 
-import br.com.cadastroEmbarcacoes.model.Cliente;
 import br.com.cadastroEmbarcacoes.model.Embarcacao;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

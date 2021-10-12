@@ -11,6 +11,12 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario implements Serializable{
+
+    public Usuario(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
