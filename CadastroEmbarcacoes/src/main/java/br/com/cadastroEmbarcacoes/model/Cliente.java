@@ -71,5 +71,9 @@ public class Cliente extends Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean isEmpty() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

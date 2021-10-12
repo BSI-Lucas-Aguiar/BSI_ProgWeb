@@ -175,4 +175,8 @@ public class Embarcacao implements Serializable{
         }
         return true;
     }
+
+    public Long getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

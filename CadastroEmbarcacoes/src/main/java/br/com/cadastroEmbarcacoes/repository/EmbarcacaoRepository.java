@@ -1,6 +1,7 @@
 package br.com.cadastroEmbarcacoes.repository;
 
 import br.com.cadastroEmbarcacoes.model.Embarcacao;
+import java.awt.print.Pageable;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +27,6 @@ public interface EmbarcacaoRepository extends JpaRepository<Embarcacao, Long> {
     @Query("SELECT DISTINCT(l) FROM Embarcacao e JOIN c.nome WHERE c.nome = :")
     public List<Embarcacao> findByNome (@Param("nome"), String nome);
     */
+
+    public Object findAll(Pageable p);
 }
