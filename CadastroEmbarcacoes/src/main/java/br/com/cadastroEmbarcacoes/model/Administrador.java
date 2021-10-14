@@ -14,6 +14,10 @@ public class Administrador extends Usuario{
         super(login, senha);
     }
     
+    public Administrador(){
+
+    }
+    
     public void cadastrarAdministrador(){
         
     }

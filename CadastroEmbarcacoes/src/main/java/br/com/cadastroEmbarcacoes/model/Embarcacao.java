@@ -24,11 +24,15 @@ public class Embarcacao implements Serializable{
         this.tipo = tipo;
         this.cliente = cliente;
     }
+    
+    public Embarcacao() {
+
+    }
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idEmbarcacao;
+    private Long idEmbarcacao;
     
     @Column(nullable = false, updatable = false, length = 20)
     @NotBlank(message = "Marca não pode estar em branco")
@@ -79,11 +83,11 @@ public class Embarcacao implements Serializable{
         this.cliente = cliente;
     }
 
-    public int getIdEmbarcacao() {
+    public Long getIdEmbarcacao() {
         return idEmbarcacao;
     }
 
-    public void setIdEmbarcacao(int idEmbarcacao) {
+    public void setIdEmbarcacao(Long idEmbarcacao) {
         this.idEmbarcacao = idEmbarcacao;
     }
 
@@ -150,14 +154,14 @@ public class Embarcacao implements Serializable{
     public void setTipo(TipoEmbarcacaoEnum tipo) {
         this.tipo = tipo;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.idEmbarcacao);
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.idEmbarcacao);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

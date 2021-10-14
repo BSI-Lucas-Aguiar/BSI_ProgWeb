@@ -22,6 +22,10 @@ public class Cliente extends Usuario {
         this.email = email;
     }
     
+    public Cliente() {
+
+    }
+    
     @Column(length = 14, nullable = false)
     @NotBlank(message = "Insira um CPF válido.")
     @CPF(message = "CPF não validado")

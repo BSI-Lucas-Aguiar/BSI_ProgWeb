@@ -1,6 +1,7 @@
 
 package br.com.cadastroEmbarcacoes.service;
 
+import br.com.cadastroEmbarcacoes.model.Cliente;
 import br.com.cadastroEmbarcacoes.model.Embarcacao;
 import br.com.cadastroEmbarcacoes.repository.EmbarcacaoRepository;
 import java.util.*;
@@ -41,13 +42,6 @@ public class EmbarcacaoService {
     }
     
     public Embarcacao update(Embarcacao e){
-        Embarcacao obj = findById(e.getId());
-        
-        List<Embarcacao> embarcacoesAtuais = obj.getCliente();
-        embarcacoesAtuais.removeAll(e.getCliente());
-        verificaExclusaoCliente(embarcacoesAtuais);
-        
-        
         try{
            return repo.save(e); 
         }catch(Exception ex){
@@ -58,15 +52,20 @@ public class EmbarcacaoService {
     
     public void delete(Long id){
         Embarcacao obj = findById(id);
+        try{
+            repo.delete(obj);
+        }catch(Exception ex){
+            throw new RuntimeException("Falha ao deletar Embarcação.");
+        }
         
-        List<Embarcacao> embarcacoesAtuais = obj.getCliente();
-        verificaExclusaoCliente(embarcacoesAtuais);
     }
     
+    /*
     private void verificaExclusaoCliente(List<Embarcacao> clientes){
         for(Embarcacao e :clientes){
             if(!e.getCliente().isEmpty())
                 throw new RuntimeException("Não é possível excluir Embarcações vinculadas a clientes.");
         }
     }
+    */
 }

@@ -2,6 +2,7 @@ package br.com.cadastroEmbarcacoes.model;
 
 import br.com.cadastroEmbarcacoes.annotation.SenhaValidation;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
@@ -17,10 +18,14 @@ public abstract class Usuario implements Serializable{
         this.senha = senha;
     }
     
+    public Usuario(){
+        
+    }
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUsuario;
+    private Long idUsuario;
     
     @Column(nullable = false, length = 100, unique = true, updatable = false)
     @NotBlank(message = "Insira um nome de Usuário válido.")
@@ -33,11 +38,11 @@ public abstract class Usuario implements Serializable{
     @SenhaValidation(message = "Senha inválida")
     private String senha;
 
-    public int getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -56,13 +61,14 @@ public abstract class Usuario implements Serializable{
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-     @Override
+
+    @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + this.idUsuario;
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.idUsuario);
         return hash;
     }
+    
 
     @Override
     public boolean equals(Object obj) {
