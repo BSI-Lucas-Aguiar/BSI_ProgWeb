@@ -5,9 +5,11 @@
  */
 package br.com.cadastroEmbarcacoes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties(value = "senha", allowGetters = false, allowSetters = true)
 public class Administrador extends Usuario{
     
     public Administrador(String login, String senha){

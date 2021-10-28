@@ -39,7 +39,7 @@ public class AdministradorService {
         }
     }
     
-    public Administrador Update(Administrador a, String senhaAtual, String novaSenha, String confirmaSenha){
+    public Administrador update(Administrador a, String senhaAtual, String novaSenha, String confirmaSenha){
         //Verifica se o adm existe
         Administrador obj = findById(a.getIdUsuario());
         try{
@@ -51,7 +51,7 @@ public class AdministradorService {
         
     }
     
-    public void Delete(Long id){
+    public void delete(Long id){
         Administrador obj = findById(id);
         try{
             administradorRepo.delete(obj);

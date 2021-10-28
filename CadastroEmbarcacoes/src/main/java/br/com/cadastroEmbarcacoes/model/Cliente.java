@@ -4,6 +4,7 @@ package br.com.cadastroEmbarcacoes.model;
 import br.com.cadastroEmbarcacoes.annotation.EmailValidation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
+@JsonIgnoreProperties(value = "senha", allowGetters = false, allowSetters = true)
 public class Cliente extends Usuario {
     
     public Cliente(String cpf, String nome, String email, String login, String senha) {
@@ -74,10 +76,6 @@ public class Cliente extends Usuario {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

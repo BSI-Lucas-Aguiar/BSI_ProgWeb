@@ -39,8 +39,10 @@ public class EmbarcacoesApplication implements CommandLineRunner {
         clienteRepo.save(c3);
 
         //Administrador
-        Administrador a1 = new Administrador("admin", "adm12345");
+        Administrador a1 = new Administrador("admin1", "adm12345");
         administradorRepo.save(a1);
+        Administrador a2 = new Administrador("admin2", "adm12345");
+        administradorRepo.save(a2);
         
         //Embarcações
         Embarcacao e1 = new Embarcacao("Fibrafort", "F420 GC", "Branca", 1000000.00, 4, false, true, TipoEmbarcacaoEnum.Iate, c1);
