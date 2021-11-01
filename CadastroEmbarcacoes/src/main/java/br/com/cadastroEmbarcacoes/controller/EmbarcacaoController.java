@@ -34,9 +34,10 @@ public class EmbarcacaoController {
         return ResponseEntity.ok(service.findById(id));  
     }
     
-    @PostMapping()
+    @PostMapping
     public ResponseEntity save(@Valid @RequestBody Embarcacao embarcacao){
-        embarcacao.setIdEmbarcacao(null); //Poderia trocar o método para setID na classe embarcação
+        embarcacao.setIdEmbarcacao(null);
+        service.save(embarcacao);
         return ResponseEntity.status(HttpStatus.CREATED).body(embarcacao);
     }
     

@@ -58,7 +58,7 @@ public class Cliente extends Usuario {
         this.cpf = cpf;
     }
 
-    public String getNomeCliente() {
+    public String getNome() {
         return nome;
     }
 

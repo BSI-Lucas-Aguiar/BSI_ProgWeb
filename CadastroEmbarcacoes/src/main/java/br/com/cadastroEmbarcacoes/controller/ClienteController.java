@@ -36,9 +36,10 @@ public class ClienteController {
         return ResponseEntity.ok(service.findById(id));  
     }
     
-    @PostMapping()
+    @PostMapping
     public ResponseEntity save(@Valid @RequestBody Cliente cliente){
         cliente.setIdUsuario(null);
+        service.save(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
     }
     

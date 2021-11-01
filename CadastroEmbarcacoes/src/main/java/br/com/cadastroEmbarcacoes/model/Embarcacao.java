@@ -7,6 +7,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -57,6 +58,7 @@ public class Embarcacao implements Serializable{
     @Column(nullable = false)
     @NotNull(message = "Número de passageiros não pode estar em branco")
     @Digits(integer = 3, fraction = 0, message = "Número de passageiros deve ser inteiro e ter até 3 digitos.")
+    @Positive
     private Integer numPassageiros;
     
     @Column(nullable = false)

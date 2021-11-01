@@ -36,9 +36,10 @@ public class AdministradorController {
         return ResponseEntity.ok(service.findById(id));  
     }
     
-    @PostMapping()
+    @PostMapping
     public ResponseEntity save(@Valid @RequestBody Administrador administrador){
-        administrador.setIdUsuario(Long.MIN_VALUE);
+        administrador.setIdUsuario(null);
+        service.save(administrador);
         return ResponseEntity.status(HttpStatus.CREATED).body(administrador);
     }
     
@@ -47,6 +48,19 @@ public class AdministradorController {
         administrador.setIdUsuario(id);
         service.update(administrador, "", "", "");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    
+    @PutMapping(path = "/{id}/alterarsenha")
+    public ResponseEntity alterarSenha(
+            @PathVariable("id") Long id,
+            @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual,
+            @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
+            @RequestParam(name = "confirmaSenha", defaultValue = "", required = true) String confirmaSenha){
+
+        Administrador administrador = service.findById(id);
+        service.update(administrador, senhaAtual, novaSenha, confirmaSenha);
+
+        return ResponseEntity.ok().build();
     }
     
     @DeleteMapping(path = "/{id}")

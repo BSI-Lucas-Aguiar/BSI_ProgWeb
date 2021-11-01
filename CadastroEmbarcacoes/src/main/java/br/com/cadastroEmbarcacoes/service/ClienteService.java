@@ -1,8 +1,11 @@
 package br.com.cadastroEmbarcacoes.service;
 
 import br.com.cadastroEmbarcacoes.model.Cliente;
+import br.com.cadastroEmbarcacoes.model.Embarcacao;
 import br.com.cadastroEmbarcacoes.repository.ClienteRepository;
+import br.com.cadastroEmbarcacoes.repository.EmbarcacaoRepository;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepo;
+    private EmbarcacaoRepository embarcacaoRepo;
     
     public List<Cliente> findAll(int page, int size){
         Pageable p = PageRequest.of(page, size);
@@ -38,7 +42,6 @@ public class ClienteService {
         }catch(Exception ex){
             throw new RuntimeException("Falha ao salvar o Cliente");
         }
-        
     }
     
     //O Id não está diretamente implementado na classe sim na super usuário.
@@ -57,14 +60,11 @@ public class ClienteService {
         //Verifica se há Embarcações
         //verificaClienteComEmbarcacao(obj);
         
-        try{
+        try{ 
             clienteRepo.delete(obj);
         }catch(Exception ex){
             throw new RuntimeException("Não é possível deletar este Cliente.");
         }
-        
-        
-        
     }
     
     private void verificaCpfEmailCadastrado(String cpf, String email){
@@ -73,14 +73,14 @@ public class ClienteService {
             throw new RuntimeException("CPF ou Email inválido");
         }
     }
-    
-    //Será implementado o método possuiEmbarcacao para verificar se o cliente possui embarcações
     /*
-    private Cliente verificaClienteComEmbarcacao(Cliente c){
-        if(!c.possuiEmcarcacao().isEmpty()){
-            throw new RuntimeException("Cliente possui embarcações cadastradas.");
-        }else{
-            
+    private void verificaClienteComEmbarcacao(Cliente c){
+        List<Embarcacao> embarcacoes = ;
+        
+        for(Embarcacao e: embarcacoes){
+            if(Objects.equals(e.getCliente().getIdUsuario(), c.getIdUsuario())){
+                throw new RuntimeException("Cliente encontrado com uma embarcação");
+            }
         }
     }
     */
