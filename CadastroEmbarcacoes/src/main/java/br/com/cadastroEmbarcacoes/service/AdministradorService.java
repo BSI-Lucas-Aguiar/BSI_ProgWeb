@@ -1,5 +1,6 @@
 package br.com.cadastroEmbarcacoes.service;
 
+import br.com.cadastroEmbarcacoes.exception.NotFoundException;
 import br.com.cadastroEmbarcacoes.model.Administrador;
 import br.com.cadastroEmbarcacoes.repository.AdministradorRepository;
 import java.util.List;
@@ -26,7 +27,7 @@ public class AdministradorService {
     public Administrador findById(Long id){
         Optional<Administrador> result = administradorRepo.findById(id);
         if(result.isEmpty()){
-            throw new RuntimeException("Administrador não encontrado.");
+            throw new NotFoundException("Administrador não encontrado.");
         }
         return result.get();
     }
@@ -45,8 +46,15 @@ public class AdministradorService {
         try{
             verificaAlterarSenha(obj, senhaAtual, novaSenha, confirmaSenha);
             return administradorRepo.save(a);
-        }catch(Exception ex){
-            throw new RuntimeException("Não foi possível alterar a senha.");
+        }catch(Exception e){
+            Throwable t = e;
+            while (t.getCause() != null){
+                t = t.getCause();
+                if(t instanceof javax.validation.ConstraintViolationException){
+                    throw ((javax.validation.ConstraintViolationException) t);
+                }
+            }
+            throw new RuntimeException("Falha ao alterar a senha." + e);
         }
         
     }

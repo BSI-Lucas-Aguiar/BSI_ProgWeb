@@ -1,5 +1,6 @@
 package br.com.cadastroEmbarcacoes.service;
 
+import br.com.cadastroEmbarcacoes.exception.NotFoundException;
 import br.com.cadastroEmbarcacoes.model.Cliente;
 import br.com.cadastroEmbarcacoes.model.Embarcacao;
 import br.com.cadastroEmbarcacoes.repository.ClienteRepository;
@@ -30,7 +31,7 @@ public class ClienteService {
     public Cliente findById(Long id){
         Optional<Cliente> result = clienteRepo.findById(id);
         if(result.isEmpty()){
-            throw new RuntimeException("Cliente não encontrado.");
+            throw new NotFoundException("Cliente não encontrado.");
         }
         return result.get();
     }

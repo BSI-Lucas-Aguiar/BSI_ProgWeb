@@ -44,7 +44,7 @@ public class AdministradorController {
     }
     
     @PutMapping(path = "/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @Valid @RequestBody Administrador administrador){
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Administrador administrador){
         administrador.setIdUsuario(id);
         service.update(administrador, "", "", "");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
