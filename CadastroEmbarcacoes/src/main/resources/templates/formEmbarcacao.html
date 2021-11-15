@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragmentos :: imports-css(title='Cadastro de novas Embarcações')}">
+        <title>...</title>
+    </head>
+    <body>
+        <div th:replace="~{fragmentos :: barramenu(pagina='')}"/>
+        
+     
+        <div class="container" style="width: 60%; margin-top: 10px">
+            <div class="card-header">
+                <h4>Cadastro de Embarcação
+                    <a class="btn btn-dark float-right" th:href="@{~/embarcacoes}" role="button">Voltar</a>
+                </h4>
+                
+                <div th:replace="~{fragmentos :: mensagens}"></div>
+                
+                <form th:object="${embarcacao}" th:action="@{~/embarcacoes/embarcacao/{id}{id=${embarcacao.id}}}" method="post" class="card-body">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="marca">Marca:</label>
+                                    <input th:field="*{marca}" type="text" class="form-control" placeholder="Marca" required="required" minlength="5" maxlength="20" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="modelo">Modelo:</label>
+                                    <input th:field="*{modelo}" type="text" class="form-control" placeholder="Modelo" required="required" minlength="5" maxlength="20" />
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-12">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="cor">Cor:</label>
+                                        <input th:field="*{cor}" type="text" class="form-control" placeholder="Cor" required="required" minlength="5" maxlength="20" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="numPassageiros">Número de Passageiros:</label>
+                                        <input th:field="*{numPassageiros}" type="number" class="form-control" required="required" min="0" max="999" placeholder="Qtd. Passageiros" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="valor">Valor:</label>
+                                        <input th:field="*{valor}" type="number" step="2" class="form-control" required="required" min="0" max="99999999" placeholder="Valor" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="aportada"> Aportada? (Marque caso seja verdadeiro)</label>
+                                        <input th:field="*{aportada}" type="checkbox" value="true" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="teveManutencao"> Teve Manutenção? (Marque caso seja verdadeiro)</label>
+                                        <input th:field="*{teveManutencao}" type="checkbox" value="true" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-12">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label for="tipo"> Tipo da embarcação</label>
+                                        <select class="form-control" name="tipo">
+                                            <option th:each="TipoEmbarcacaoEnum : ${T(br.com.cadastroEmbarcacoes.model.TipoEmbarcacaoEnum).values()}" th:value="${tipo}" th:text="${TipoEmbarcacaoEnum}" />
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-9">
+                                        <label for="cliente"> Cliente dono da Embarcação</label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            Mensagens de erro fragmento.
+            Faltam os campos de:  Cliente cliente
+            
+            
+            
+        </div>
+        
+        <div th:replace="~{fragmentos :: imports-js}"/>
+        
+    </body>
+</html>

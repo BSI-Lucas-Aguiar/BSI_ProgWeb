@@ -1,5 +1,5 @@
 
-package br.com.cadastroEmbarcacoes.controller;
+package br.com.cadastroEmbarcacoes.controller.apirest;
 
 import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;

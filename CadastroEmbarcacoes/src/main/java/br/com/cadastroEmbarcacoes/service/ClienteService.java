@@ -47,7 +47,7 @@ public class ClienteService {
     
     //O Id não está diretamente implementado na classe sim na super usuário.
     public Cliente update(Cliente c, String email){
-        Cliente obj = findById(c.getIdUsuario());
+        Cliente obj = findById(c.getId());
         try{
             c.setEmail(obj.getEmail());
             return clienteRepo.save(c);

@@ -42,7 +42,7 @@ public class AdministradorService {
     
     public Administrador update(Administrador a, String senhaAtual, String novaSenha, String confirmaSenha){
         //Verifica se o adm existe
-        Administrador obj = findById(a.getIdUsuario());
+        Administrador obj = findById(a.getId());
         try{
             verificaAlterarSenha(obj, senhaAtual, novaSenha, confirmaSenha);
             return administradorRepo.save(a);

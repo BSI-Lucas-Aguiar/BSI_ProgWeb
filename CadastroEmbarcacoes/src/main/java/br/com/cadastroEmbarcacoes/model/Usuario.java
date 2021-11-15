@@ -25,7 +25,7 @@ public abstract class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;
+    private Long id;
     
     @Column(nullable = false, length = 100, unique = true, updatable = false)
     @NotBlank(message = "Insira um nome de Usuário válido.")
@@ -38,12 +38,12 @@ public abstract class Usuario implements Serializable{
     @SenhaValidation(message = "Senha inválida")
     private String senha;
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -64,10 +64,12 @@ public abstract class Usuario implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.idUsuario);
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.id);
         return hash;
     }
+
+    
     
 
     @Override
@@ -82,7 +84,7 @@ public abstract class Usuario implements Serializable{
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (this.idUsuario != other.idUsuario) {
+        if (this.id != other.id) {
             return false;
         }
         return true;

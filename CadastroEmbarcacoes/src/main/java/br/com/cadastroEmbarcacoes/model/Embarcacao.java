@@ -33,7 +33,7 @@ public class Embarcacao implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEmbarcacao;
+    private Long id;
     
     @Column(nullable = false, updatable = false, length = 20)
     @NotBlank(message = "Marca não pode estar em branco")
@@ -57,7 +57,6 @@ public class Embarcacao implements Serializable{
     
     @Column(nullable = false)
     @NotNull(message = "Número de passageiros não pode estar em branco")
-    @Digits(integer = 3, fraction = 0, message = "Número de passageiros deve ser inteiro e ter até 3 digitos.")
     @Positive
     private Integer numPassageiros;
     
@@ -85,12 +84,12 @@ public class Embarcacao implements Serializable{
         this.cliente = cliente;
     }
 
-    public Long getIdEmbarcacao() {
-        return idEmbarcacao;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdEmbarcacao(Long idEmbarcacao) {
-        this.idEmbarcacao = idEmbarcacao;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getMarca() {
@@ -117,36 +116,49 @@ public class Embarcacao implements Serializable{
         this.cor = cor;
     }
 
-    public double getValor() {
-        return valor;
-    }
     
-    public int getNumPassageiros() {
+    public Integer getNumPassageiros() {
         return numPassageiros;
     }
 
-    public void setNumPassageiros(int numPassageiros) {
+    public void setNumPassageiros(Integer numPassageiros) {
         this.numPassageiros = numPassageiros;
     }
 
-    public void setValor(double valor) {
+    public Double getValor() {
+        return valor;
+    }
+    
+    public void setValor(Double valor) {
         this.valor = valor;
     }
+    
+    //Manutenção
 
-    public boolean isTeveManutencao() {
+    public Boolean isTeveManutencao() {
         return teveManutencao;
     }
 
-    public void setTeveManutencao(boolean teveManutencao) {
+    public void setTeveManutencao(Boolean teveManutencao) {
         this.teveManutencao = teveManutencao;
     }
 
-    public boolean isAportada() {
+    public Boolean getTeveManutencao() {
+        return teveManutencao;
+    }
+
+    //Aportada
+   
+    public Boolean isAportada() {
         return aportada;
     }
 
-    public void setAportada(boolean aportada) {
+    public void setAportada(Boolean aportada) {
         this.aportada = aportada;
+    }
+    
+    public Boolean getAportada() {
+        return aportada;
     }
     
     public TipoEmbarcacaoEnum getTipo() {
@@ -156,12 +168,23 @@ public class Embarcacao implements Serializable{
     public void setTipo(TipoEmbarcacaoEnum tipo) {
         this.tipo = tipo;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 31 * hash + Objects.hashCode(this.idEmbarcacao);
-        return hash;
+    
+    
+    
+    public String retornaAportada(){
+        if(this.aportada == true){
+            return "Sim";
+        }else{
+            return "Não";
+        }
+    }
+    
+    public String retornaManutencao(){
+        if(this.teveManutencao == true){
+            return "Sim";
+        }else{
+            return "Não";
+        }
     }
     
     @Override
@@ -176,10 +199,17 @@ public class Embarcacao implements Serializable{
             return false;
         }
         final Embarcacao other = (Embarcacao) obj;
-        if (!Objects.equals(this.idEmbarcacao, other.idEmbarcacao)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
 }

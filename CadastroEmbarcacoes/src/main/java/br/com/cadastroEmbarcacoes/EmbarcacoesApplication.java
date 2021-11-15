@@ -45,8 +45,12 @@ public class EmbarcacoesApplication implements CommandLineRunner {
         administradorRepo.save(a2);
         
         //Embarcações
-        Embarcacao e1 = new Embarcacao("Fibrafort", "F420 GC", "Branca", 1000000.00, 4, false, true, TipoEmbarcacaoEnum.Iate, c1);
+        Embarcacao e1 = new Embarcacao("Fibrafort", "F420 GC", "Branca", 4000000.00, 8, false, true, TipoEmbarcacaoEnum.Iate, c1);
         embarcacaoRepo.save(e1);
+        Embarcacao e2 = new Embarcacao("Yamaha", "Ventura V215", "Prata", 2500000.00, 4, false, true, TipoEmbarcacaoEnum.Lancha, c2);
+        embarcacaoRepo.save(e2);
+        Embarcacao e3 = new Embarcacao("Kawasaki", "SX-RTM", "Verde", 56700.00, 2, false, true, TipoEmbarcacaoEnum.JetSki, c3);
+        embarcacaoRepo.save(e3);
         
     }
 

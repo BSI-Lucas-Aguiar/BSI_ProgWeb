@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragmentos :: imports-css(title='Cadastro de novos Clientes')}">
+        <title>...</title>
+    </head>
+    <body>
+        <div th:replace="~{fragmentos :: barramenu(pagina='')}"/>
+        
+        <div class="container" style="width: 60%; margin-top: 10px">
+            <div class="card-header">
+                <h4>Cadastro de Clientes
+                    <a class="btn btn-dark float-right" th:href="@{~/clientes}" role="button">Voltar</a>
+                </h4>
+                
+                <div th:replace="~{fragmentos :: mensagens}"></div>
+                
+                <form th:object="${cliente}" th:action="@{~/clientes/cliente/{id}{id=${cliente.id}}}" method="post" class="card-body">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="login">Login:</label>
+                                    <input th:field="*{login}" type="text" class="form-control" placeholder="Login" required="required" minlength="5" maxlength="100" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="senha">Senha:</label>
+                                    <input th:field="*{senha}" type="password" class="form-control" placeholder="Cadastre sua senha" required="required" minlength="8" maxlength="8" />
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-12">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="nome">Nome: </label>
+                                        <input th:field="*{nome}" type="text" class="form-control" placeholder="Insira seu nome" required="required" minlength="5" maxlength="100" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="cpf">CPF:</label>
+                                        <input th:field="*{cpf}" type="text" class="form-control" required="required" minlength="14" maxlength="14" placeholder="000.000.000-00" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="email">Email:</label>
+                                        <input th:field="*{email}" type="text" class="form-control" required="required" minlength="5" maxlength="100" placeholder="exemplo@hotmail.com" />
+                                    </div>
+                                </div>
+                            </div>
+
+                          
+                        </div>
+                    </div>
+                </form>
+            </div>
+            Mensagens de erro fragmento faltando
+           
+        </div>
+        
+        <div th:replace="~{fragmentos :: imports-js}"/>
+        
+    </body>
+</html>

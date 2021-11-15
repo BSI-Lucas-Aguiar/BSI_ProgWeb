@@ -1,4 +1,4 @@
-package br.com.cadastroEmbarcacoes.controller;
+package br.com.cadastroEmbarcacoes.controller.apirest;
 
 import br.com.cadastroEmbarcacoes.model.Cliente;
 import br.com.cadastroEmbarcacoes.service.ClienteService;
@@ -38,14 +38,14 @@ public class ClienteController {
     
     @PostMapping
     public ResponseEntity save(@Valid @RequestBody Cliente cliente){
-        cliente.setIdUsuario(null);
+        cliente.setId(null);
         service.save(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
     }
     
     @PutMapping(path = "/{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @Valid @RequestBody Cliente cliente){
-        cliente.setIdUsuario(id);
+        cliente.setId(id);
         service.update(cliente, null);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

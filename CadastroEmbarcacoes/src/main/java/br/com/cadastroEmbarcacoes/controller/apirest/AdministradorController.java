@@ -1,5 +1,5 @@
 
-package br.com.cadastroEmbarcacoes.controller;
+package br.com.cadastroEmbarcacoes.controller.apirest;
 
 import br.com.cadastroEmbarcacoes.model.Administrador;
 import br.com.cadastroEmbarcacoes.service.AdministradorService;
@@ -38,14 +38,14 @@ public class AdministradorController {
     
     @PostMapping
     public ResponseEntity save(@Valid @RequestBody Administrador administrador){
-        administrador.setIdUsuario(null);
+        administrador.setId(null);
         service.save(administrador);
         return ResponseEntity.status(HttpStatus.CREATED).body(administrador);
     }
     
     @PutMapping(path = "/{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Administrador administrador){
-        administrador.setIdUsuario(id);
+        administrador.setId(id);
         service.update(administrador, "", "", "");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
