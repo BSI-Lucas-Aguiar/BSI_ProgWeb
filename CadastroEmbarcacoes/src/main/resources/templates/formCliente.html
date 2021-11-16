@@ -14,7 +14,7 @@
                 
                 <div th:replace="~{fragmentos :: mensagens}"></div>
                 
-                <form th:object="${cliente}" th:action="@{~/clientes/cliente/{id}{id=${cliente.id}}}" method="post" class="card-body">
+                <form th:object="${cliente}" th:action="@{~/clientes/cliente/{id}(id=${cliente.id})}" method="post" class="card-body">
                     <input type="hidden" th:field="*{id}" />
                     <div class="form-row">
                         <div class="form-group col-md-12">
@@ -49,9 +49,11 @@
                           
                         </div>
                     </div>
+                    <div>
+                        <input type="submit" class="btn btn-success" value="Salvar" />
+                    </div>
                 </form>
             </div>
-            Mensagens de erro fragmento faltando
            
         </div>
         

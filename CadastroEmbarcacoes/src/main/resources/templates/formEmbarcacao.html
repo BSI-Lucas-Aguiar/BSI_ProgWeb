@@ -5,8 +5,6 @@
     </head>
     <body>
         <div th:replace="~{fragmentos :: barramenu(pagina='')}"/>
-        
-     
         <div class="container" style="width: 60%; margin-top: 10px">
             <div class="card-header">
                 <h4>Cadastro de Embarcação
@@ -15,7 +13,7 @@
                 
                 <div th:replace="~{fragmentos :: mensagens}"></div>
                 
-                <form th:object="${embarcacao}" th:action="@{~/embarcacoes/embarcacao/{id}{id=${embarcacao.id}}}" method="post" class="card-body">
+                <form th:object="${embarcacao}" th:action="@{~/embarcacoes/embarcacao/{id}(id=${embarcacao.id})}" method="post" class="card-body">
                     <input type="hidden" th:field="*{id}" />
                     <div class="form-row">
                         <div class="form-group col-md-12">
@@ -77,9 +75,11 @@
 
                         </div>
                     </div>
+                    <div>
+                        <input type="submit" class="btn btn-success" value="Salvar" />
+                    </div>
                 </form>
             </div>
-            Mensagens de erro fragmento.
             Faltam os campos de:  Cliente cliente
             
             
