@@ -9,7 +9,7 @@
         <div class="container" style="margin-top: 10px">
             <div class="card-header">
                 <h4>
-                    Clientes Cadastradas
+                    Clientes Cadastrados
                     <a class="btn btn-primary float-right" th:href="@{~/clientes/cliente}" role="button">Novo Cliente</a>
                 </h4>
                 
@@ -30,8 +30,8 @@
                         <span th:text="${' '+cliente.cpf}" />
                     </div>
                 
-                    <a th:href="@{'~clientes/cliente/'+${cliente.id}}" class="btn btn-warning">Editar</a>
-                    <a th:href="@{'~clientes/'+${cliente.id+'/deletar'}}" class="btn btn-danger">Excluir</a>
+                    <a th:href="@{'~/clientes/cliente/'+${cliente.id}}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{'~/clientes/'+${cliente.id+'/deletar'}}" class="btn btn-danger">Excluir</a>
                 </div>
             </div>
         </div>
