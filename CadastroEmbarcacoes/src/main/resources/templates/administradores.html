@@ -20,7 +20,7 @@
                     <h5 class="card-title" th:text="${administrador.login}"></h5>
 
                     <a th:href="@{'~/administradores/administrador/'+${administrador.id}}" class="btn btn-warning">Editar</a>
-                    <a th:href="@{'~/administradores/'+${administrador.id+'/deletar'}}" class="btn btn-danger">Excluir</a>
+                    <a th:href="@{'~/administradores/'+${administrador.id+'/deletar'}}" onclick="return confirm('Deseja excluir este cliente?')" class="btn btn-danger">Excluir</a>
                 </div>
             </div>
         </div>

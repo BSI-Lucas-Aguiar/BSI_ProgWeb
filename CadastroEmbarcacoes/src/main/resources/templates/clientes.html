@@ -31,7 +31,7 @@
                     </div>
                 
                     <a th:href="@{'~/clientes/cliente/'+${cliente.id}}" class="btn btn-warning">Editar</a>
-                    <a th:href="@{'~/clientes/'+${cliente.id+'/deletar'}}" class="btn btn-danger">Excluir</a>
+                    <a th:href="@{'~/clientes/'+${cliente.id+'/deletar'}}" onclick="return confirm('Deseja excluir este cliente?')" class="btn btn-danger">Excluir</a>
                 </div>
             </div>
         </div>

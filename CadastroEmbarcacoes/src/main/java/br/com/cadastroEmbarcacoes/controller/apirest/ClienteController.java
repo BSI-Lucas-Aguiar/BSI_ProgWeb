@@ -46,13 +46,26 @@ public class ClienteController {
     @PutMapping(path = "/{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @Valid @RequestBody Cliente cliente){
         cliente.setId(id);
-        service.update(cliente, null);
+        service.update(cliente, "", "", "");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
     @DeleteMapping(path = "/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id){
         service.delete(id);
+        return ResponseEntity.ok().build();
+    }
+    
+    @PutMapping(path = "/{id}/alterarsenha")
+    public ResponseEntity alterarSenha(
+            @PathVariable("id") Long id,
+            @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual,
+            @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
+            @RequestParam(name = "confirmarNovaSenha", defaultValue = "", required = true) String confirmarNovaSenha){
+        
+        Cliente f = service.findById(id);
+        service.update(f, senhaAtual, novaSenha, confirmarNovaSenha);
+        
         return ResponseEntity.ok().build();
     }
 }

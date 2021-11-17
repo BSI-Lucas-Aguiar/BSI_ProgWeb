@@ -2,11 +2,9 @@ package br.com.cadastroEmbarcacoes.service;
 
 import br.com.cadastroEmbarcacoes.exception.NotFoundException;
 import br.com.cadastroEmbarcacoes.model.Cliente;
-import br.com.cadastroEmbarcacoes.model.Embarcacao;
 import br.com.cadastroEmbarcacoes.repository.ClienteRepository;
 import br.com.cadastroEmbarcacoes.repository.EmbarcacaoRepository;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -46,8 +44,9 @@ public class ClienteService {
     }
     
     //O Id não está diretamente implementado na classe sim na super usuário.
-    public Cliente update(Cliente c, String email){
+    public Cliente update(Cliente c, String senhaAtual, String novaSenha, String confirmarNovaSenha){
         Cliente obj = findById(c.getId());
+        alterarSenha(obj, senhaAtual, novaSenha, confirmarNovaSenha);
         try{
             c.setEmail(obj.getEmail());
             return clienteRepo.save(c);
@@ -72,6 +71,18 @@ public class ClienteService {
         List<Cliente> result = clienteRepo.findByCpfOrEmail(cpf, email);
         if(!result.isEmpty()){
             throw new RuntimeException("CPF ou Email inválido");
+        }
+    }
+    
+    private void alterarSenha(Cliente obj, String senhaAtual, String novaSenha, String confirmarNovaSenha){
+        if(!senhaAtual.isBlank() && !novaSenha.isBlank() && !confirmarNovaSenha.isBlank()){
+            if(senhaAtual.equals(obj.getSenha())){
+                throw new RuntimeException("Senha atual está incorreta!");
+            }
+            if(!novaSenha.equals(confirmarNovaSenha)){
+                throw new RuntimeException("Nova Senha e Confirmar Nova Senha, não são iguais!");
+            }
+            obj.setSenha(novaSenha);
         }
     }
     /*
