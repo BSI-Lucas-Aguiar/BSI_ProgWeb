@@ -3,6 +3,7 @@ package br.com.cadastroEmbarcacoes.controller.view;
 
 import br.com.cadastroEmbarcacoes.model.Embarcacao;
 import br.com.cadastroEmbarcacoes.model.TipoEmbarcacaoEnum;
+import br.com.cadastroEmbarcacoes.service.ClienteService;
 import br.com.cadastroEmbarcacoes.service.EmbarcacaoService;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EmbarcacaoViewController {
     @Autowired
     private EmbarcacaoService service;
+    @Autowired
+    private ClienteService service2;
     
     @GetMapping
     public String getAll(Model model){
@@ -36,6 +39,7 @@ public class EmbarcacaoViewController {
     public String cadastroEmbarcacao(Model model){
         model.addAttribute("embarcacao", new Embarcacao());
         model.addAttribute("tipoEmbarcacao", TipoEmbarcacaoEnum.values());
+        model.addAttribute("clientes", service2.findAll());
         return "formEmbarcacao";
     }
     
@@ -54,12 +58,7 @@ public class EmbarcacaoViewController {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formEmbarcacao";
         }
-        /*
-        if(!cliente.getSenha().equals(confirmarSenha)){
-            model.addAttribute("msgErros", new ObjectError("cliente", "Campos senha e confirmar senha devem ser iguais."));
-            return "formCliente";
-        }
-        */
+
         embarcacao.setId(null);
         
         try{
@@ -76,6 +75,7 @@ public class EmbarcacaoViewController {
     @GetMapping(path="/embarcacao/{id}")
     public String atualizacao(@PathVariable("id") Long id, Model model){
         model.addAttribute("embarcacao", service.findById(id));
+        model.addAttribute("clientes", service2.findAll());
         return "formEmbarcacao";
     }
     

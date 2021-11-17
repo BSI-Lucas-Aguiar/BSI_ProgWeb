@@ -33,7 +33,7 @@ public class Cliente extends Usuario {
     @CPF(message = "CPF não validado")
     private String cpf;
     
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, updatable = true)
     @NotBlank(message = "Insira um nome válido.")
     @Length(min = 5, max = 100, message = "O nome deve ter no mínimo 5 caracteres e no máximo 100.")
     private String nome;

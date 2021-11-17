@@ -35,17 +35,17 @@ public class Embarcacao implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false, updatable = false, length = 20)
+    @Column(nullable = false, updatable = true, length = 20)
     @NotBlank(message = "Marca não pode estar em branco")
     @Length(min = 5,max = 20, message = "Marca deve ter no mínimo 5 caracteres e no máximo 20")
     private String marca;
     
-    @Column(updatable = false, length = 20)
+    @Column(updatable = true, length = 20)
     @NotBlank(message = "Modelo não pode estar em branco")
     @Length(min = 5,max = 20, message = "Modelo deve ter no mínimo 5 caracteres e no máximo 20")
     private String modelo;
     
-    @Column(updatable = false, length = 20)
+    @Column(updatable = true, length = 20)
     @NotBlank(message = "Cor não pode estar em branco")
     @Length(min = 5,max = 20, message = "Cor deve ter no mínimo 5 caracteres e no máximo 20")
     private String cor;

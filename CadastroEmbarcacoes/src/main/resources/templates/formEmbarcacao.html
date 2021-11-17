@@ -63,12 +63,16 @@
                                     <div class="form-group col-md-3">
                                         <label for="tipo"> Tipo da embarcação</label>
                                         <select class="form-control" name="tipo">
-                                            <option th:each="TipoEmbarcacaoEnum : ${T(br.com.cadastroEmbarcacoes.model.TipoEmbarcacaoEnum).values()}" th:value="${tipo}" th:text="${TipoEmbarcacaoEnum}" />
+                                            <option th:each="tipo : ${T(br.com.cadastroEmbarcacoes.model.TipoEmbarcacaoEnum).values()}" th:value="${tipo}" th:text="${tipo}" />
                                         </select>
                                     </div>
                                     <div class="form-group col-md-9">
                                         <label for="cliente"> Cliente dono da Embarcação</label>
-                                        
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" th:field="*{cliente.id}">
+                                                <option th:each="cliente : ${clientes}" th:text="${cliente.nome}" th:value="${cliente.id}"></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
