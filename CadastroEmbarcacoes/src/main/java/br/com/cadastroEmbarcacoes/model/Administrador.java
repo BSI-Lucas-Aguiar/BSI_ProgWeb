@@ -5,15 +5,24 @@
  */
 package br.com.cadastroEmbarcacoes.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
-@JsonIgnoreProperties(value = "senha", allowGetters = false, allowSetters = true)
 public class Administrador extends Usuario{
     
-    public Administrador(String login, String senha){
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Size(min = 1, message = "Administrador deve ter pelo menos uma permissão")
+    private List<Permissao> permissoes;
+
+    public Administrador(List<Permissao> permissoes, String login, String senha) {
         super(login, senha);
+        this.permissoes = permissoes;
+    }
+
+    public Administrador(List<Permissao> permissoes) {
+        this.permissoes = permissoes;
     }
     
     public Administrador(){
@@ -23,4 +32,14 @@ public class Administrador extends Usuario{
     public void cadastrarAdministrador(){
         
     }
+
+    public List<Permissao> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setPermissoes(List<Permissao> permissoes) {
+        this.permissoes = permissoes;
+    }
+    
+    
 }

@@ -10,7 +10,7 @@ import javax.validation.*;
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SenhaValidation {
-    String message() default "Senha inválida.";
+    String message() default "A validação falhou. (SenhaValidation)";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

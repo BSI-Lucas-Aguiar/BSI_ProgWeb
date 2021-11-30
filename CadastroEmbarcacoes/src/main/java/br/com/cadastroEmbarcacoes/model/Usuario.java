@@ -1,6 +1,7 @@
 package br.com.cadastroEmbarcacoes.model;
 
 import br.com.cadastroEmbarcacoes.annotation.SenhaValidation;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
@@ -8,9 +9,9 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonIgnoreProperties(value = "senha", allowGetters = false, allowSetters = true)
 public abstract class Usuario implements Serializable{
 
     public Usuario(String login, String senha) {
@@ -28,14 +29,13 @@ public abstract class Usuario implements Serializable{
     private Long id;
     
     @Column(nullable = false, length = 100, unique = true, updatable = false)
-    @NotBlank(message = "Insira um nome de Usuário válido.")
+    @NotBlank(message = "O nome do usuário não pode estar em branco.")
     @Length(min = 5, max = 100, message = "O nome de usuário deve ter no mínimo 5 caracteres e no máximo 100.")
     private String login;
     
     @Column(nullable = false, unique = false, updatable = true) //Pretendido gerar hash criptografado de 255 caracteres
-    @NotBlank(message = "Insira uma senha válida.")
-    @Length(min = 8, max = 8, message = "A senha deve conter exatamente 8 caractere.")
-    @SenhaValidation(message = "Senha inválida")
+    //@NotBlank(message = "A senha não pode estar em branco.")
+    //@SenhaValidation
     private String senha;
 
     public Long getId() {

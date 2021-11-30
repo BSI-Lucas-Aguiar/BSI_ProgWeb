@@ -15,8 +15,9 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.RestController;
 
-@RestControllerAdvice
+@RestControllerAdvice(annotations = RestController.class)
 public class MyRestControllerAdvice {
     
     @ExceptionHandler(ConstraintViolationException.class)
@@ -59,7 +60,7 @@ public class MyRestControllerAdvice {
                 HttpStatus.NOT_FOUND.name(), 
                 e.getMessage(), 
                 request.getRequestURI());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
     
     @ExceptionHandler(Exception.class)
@@ -70,6 +71,6 @@ public class MyRestControllerAdvice {
                 HttpStatus.BAD_REQUEST.name(), 
                 e.getMessage(), 
                 request.getRequestURI());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
     }
 }

@@ -57,7 +57,7 @@ public class Embarcacao implements Serializable{
     
     @Column(nullable = false)
     @NotNull(message = "Número de passageiros não pode estar em branco")
-    @Positive
+    @Positive(message = "O número de passageiros deve ser positivo.")
     private Integer numPassageiros;
     
     @Column(nullable = false)

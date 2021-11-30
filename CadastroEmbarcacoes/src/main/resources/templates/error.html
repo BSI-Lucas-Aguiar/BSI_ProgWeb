@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head th:replace="~{fragmentos :: import-css(title='Erro')}">
+        <title th:text="${title}">Erro</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <div th:replace="~{fragmentos :: barramenu(pagina='embarcacoes')}" />
+        
+        <div class="container" align="center">
+            <h3>Ops! Algo deu errado.</h3>
+            <div th:replace="~{fragmentos :: mensagens)}" />
+            <a class="btn btn-primary" th:href="@{~/}" role="button">Voltar</a>
+        </div>
+        
+        <div th:replace="~{fragmentos :: import-js}" />
+    </body>
+</html>

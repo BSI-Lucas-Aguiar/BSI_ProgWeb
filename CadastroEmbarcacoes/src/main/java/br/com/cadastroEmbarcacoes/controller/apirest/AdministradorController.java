@@ -50,6 +50,7 @@ public class AdministradorController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
+    
     @PutMapping(path = "/{id}/alterarsenha")
     public ResponseEntity alterarSenha(
             @PathVariable("id") Long id,
@@ -62,6 +63,7 @@ public class AdministradorController {
 
         return ResponseEntity.ok().build();
     }
+    
     
     @DeleteMapping(path = "/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id){

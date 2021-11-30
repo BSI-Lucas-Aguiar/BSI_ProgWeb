@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +25,10 @@ public class AdministradorService {
         return administradorRepo.findAll();
     }
     
+    public Administrador findByLogin(String login){
+        return administradorRepo.findByLogin(login);
+    }
+    
     public Administrador findById(Long id){
         Optional<Administrador> result = administradorRepo.findById(id);
         if(result.isEmpty()){
@@ -34,18 +39,21 @@ public class AdministradorService {
     
     public Administrador save(Administrador a){
         try{
+            a.setSenha(new BCryptPasswordEncoder().encode(a.getSenha()));
             return administradorRepo.save(a);
         }catch(Exception ex){
             throw new RuntimeException("Não foi possível salvar o administrador");
         }
     }
     
-    public Administrador update(Administrador a, String senhaAtual, String novaSenha, String confirmaSenha){
+    public Administrador update(Administrador adm, String senhaAtual, String novaSenha, String confirmaSenha){
         //Verifica se o adm existe
-        Administrador obj = findById(a.getId());
+        Administrador obj = findById(adm.getId());
+        alterarSenha(obj, senhaAtual, novaSenha, confirmaSenha);
         try{
-            verificaAlterarSenha(obj, senhaAtual, novaSenha, confirmaSenha);
-            return administradorRepo.save(a);
+            adm.setLogin(obj.getLogin());
+            adm.setSenha(obj.getSenha());
+            return administradorRepo.save(adm);
         }catch(Exception e){
             Throwable t = e;
             while (t.getCause() != null){
@@ -54,7 +62,7 @@ public class AdministradorService {
                     throw ((javax.validation.ConstraintViolationException) t);
                 }
             }
-            throw new RuntimeException("Falha ao alterar a senha." + e);
+            throw new RuntimeException("Falha ao modificar administrador." + e);
         }
         
     }
@@ -68,16 +76,18 @@ public class AdministradorService {
         }
     }
     
-    private void verificaAlterarSenha(Administrador obj, String senhaAtual, String novaSenha, String confirmaSenha){
+    private void alterarSenha(Administrador obj, String senhaAtual, String novaSenha, String confirmaSenha){
+        BCryptPasswordEncoder crypt = new BCryptPasswordEncoder();
         if(!senhaAtual.isBlank() && !novaSenha.isBlank() && !confirmaSenha.isBlank()){
-            if(senhaAtual.equals(obj.getSenha())){
-                throw new RuntimeException("A nova senha é igual a senha atual");
+            if(!crypt.matches(senhaAtual, obj.getSenha())){
+                throw new RuntimeException("A senha atual inserida está incorreta!");
             }
-            if(novaSenha.equals(confirmaSenha)){
-                throw new RuntimeException("A senha e a confirmação não são iguais");
+            if(!novaSenha.equals(confirmaSenha)){
+                throw new RuntimeException("A nova senha e a confirmação não são iguais.");
             }
+            obj.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
         }
-        obj.setSenha(novaSenha);
+        
     }
   
 }
